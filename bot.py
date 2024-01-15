@@ -22,9 +22,9 @@ class Bot(Client):
     def __init__(self):
         super().__init__(
             name="FiletoLink",
-            api_id=Config.API_ID,
-            api_hash=Config.API_HASH,
-            bot_token=Config.BOT_TOKEN,
+            api_id=config.API_ID,
+            api_hash=config.API_HASH,
+            bot_token=config.BOT_TOKEN,
             workers=200,
             plugins={"root": "plugins"},
             sleep_threshold=15,
