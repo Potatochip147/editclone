@@ -15,6 +15,43 @@ import logging.config
 # Subscribe YouTube Channel For Amazing Bot https://youtube.com/@Tech_VJ
 # Ask Doubt on telegram @KingVJ01
 
+# ...
+
+class Bot(Client):
+
+    def __init__(self):
+        super().__init__(
+            name="renamer",
+            api_id=Config.API_ID,
+            api_hash=Config.API_HASH,
+            bot_token=Config.BOT_TOKEN,
+            workers=200,
+            plugins={"root": "plugins"},
+            sleep_threshold=15,
+        )
+
+    async def start(self):
+        await super().start()
+        me = await self.get_me()
+        self.mention = me.mention
+        self.username = me.username
+        self.force_channel = Config.FORCE_SUB
+        if Config.FORCE_SUB:
+            try:
+                link = await self.export_chat_invite_link(Config.FORCE_SUB)
+                self.invitelink = link
+            except Exception as e:
+                logging.warning(e)
+                logging.warning("Make Sure Bot is admin in your force sub channel")
+                self.force_channel = None
+        # ... (rest of the code)
+
+    # ... (rest of the class)
+
+bot = Bot()
+bot.run()
+
+
 # Get logging configurations
 logging.config.fileConfig('logging.conf')
 logging.getLogger().setLevel(logging.INFO)
