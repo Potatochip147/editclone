@@ -21,7 +21,7 @@ class Bot(Client):
 
     def __init__(self):
         super().__init__(
-            name="renamer",
+            name="FiletoLink",
             api_id=Config.API_ID,
             api_hash=Config.API_HASH,
             bot_token=Config.BOT_TOKEN,
@@ -35,10 +35,10 @@ class Bot(Client):
         me = await self.get_me()
         self.mention = me.mention
         self.username = me.username
-        self.force_channel = Config.FORCE_SUB
+        self.force_channel = FORCE_SUB
         if Config.FORCE_SUB:
             try:
-                link = await self.export_chat_invite_link(Config.FORCE_SUB)
+                link = await self.export_chat_invite_link(FORCE_SUB)
                 self.invitelink = link
             except Exception as e:
                 logging.warning(e)
@@ -71,7 +71,7 @@ logging.getLogger("aiohttp.web").setLevel(logging.ERROR)
 
 from pyrogram import Client, __version__
 from pyrogram.raw.all import layer
-from config import Var, LOG_CHANNEL
+from config import Var, LOG_CHANNEL, FORCE_SUB, API_ID, API_HASH, BOT_TOKEN
 from typing import Union, Optional, AsyncGenerator
 from pyrogram import types
 from Script import script 
