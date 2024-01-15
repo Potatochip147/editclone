@@ -22,9 +22,9 @@ class Bot(Client):
     def __init__(self):
         super().__init__(
             name="FiletoLink",
-            api_id=config.API_ID,
-            api_hash=config.API_HASH,
-            bot_token=config.BOT_TOKEN,
+            api_id=API_ID,
+            api_hash=API_HASH,
+            bot_token=BOT_TOKEN,
             workers=200,
             plugins={"root": "plugins"},
             sleep_threshold=15,
@@ -36,7 +36,7 @@ class Bot(Client):
         self.mention = me.mention
         self.username = me.username
         self.force_channel = FORCE_SUB
-        if Config.FORCE_SUB:
+        if FORCE_SUB:
             try:
                 link = await self.export_chat_invite_link(FORCE_SUB)
                 self.invitelink = link
