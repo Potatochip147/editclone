@@ -5,10 +5,10 @@ from config import FORCE_SUB
 
 async def not_subscribed(_, client, message):
     await db.add_user(client, message)
-    if not Config.FORCE_SUB:
+    if not FORCE_SUB:
         return False
     try:             
-        user = await client.get_chat_member(Config.FORCE_SUB, message.from_user.id) 
+        user = await client.get_chat_member(FORCE_SUB, message.from_user.id) 
         if user.status == enums.ChatMemberStatus.BANNED:
             return True 
         else:
@@ -30,7 +30,7 @@ async def forces_sub(client, message):
     ]
     text = "**Sᴏʀʀy Dᴜᴅᴇ Yᴏᴜ'ʀᴇ Nᴏᴛ Jᴏɪɴᴇᴅ My Cʜᴀɴɴᴇʟ 😐. Sᴏ Pʟᴇᴀꜱᴇ Jᴏɪɴ Oᴜʀ Uᴩᴅᴀᴛᴇ Cʜᴀɴɴᴇʟ Tᴏ Cᴄᴏɴᴛɪɴᴜᴇ**"
     try:
-        user = await client.get_chat_member(Config.FORCE_SUB, message.from_user.id)    
+        user = await client.get_chat_member(FORCE_SUB, message.from_user.id)    
         if user.status == enums.ChatMemberStatus.BANNED:                                   
             return await client.send_message(message.from_user.id, text="Sᴏʀʀy Yᴏᴜ'ʀᴇ Bᴀɴᴜᴇᴅ Tᴏ Uꜱᴇ Mᴇ")  
     except UserNotParticipant:                       
